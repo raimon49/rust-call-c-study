@@ -6,6 +6,7 @@ fn main() {
         // Rustの実行ファイルとリンクされるCライブラリで定義されている関数を宣言
         extern {
             fn strlen(s: *const c_char) -> usize;
+            static environ: *mut *mut c_char;
         }
 
         let rust_str = "I'll be back";
