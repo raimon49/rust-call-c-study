@@ -2,6 +2,7 @@ fn main() {
     {
         use std::os::raw::c_char;
         use std::ffi::CString;
+        use std::ffi::CStr;
 
         // Rustの実行ファイルとリンクされるCライブラリで定義されている関数を宣言
         extern {
@@ -16,6 +17,12 @@ fn main() {
         unsafe {
             // as_ptr()は文字列の先頭を *const c_char で返すため strlen() に渡せる
             assert_eq!(strlen(null_terminated.as_ptr()), 12);
+
+            if !environ.is_null() && !(*environ).is_null() {
+                let var = CStr::from_ptr(*environ);
+                println!("first environment variable: {}",
+                         var.to_string_lossy());
+            }
         }
     }
 }
