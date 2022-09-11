@@ -19,9 +19,10 @@ fn main() {
             assert_eq!(strlen(null_terminated.as_ptr()), 12);
 
             if !environ.is_null() && !(*environ).is_null() {
+                // environの最初の要素を借用したCStrを作る
                 let var = CStr::from_ptr(*environ);
                 println!("first environment variable: {}",
-                         var.to_string_lossy());
+                         var.to_string_lossy()); // to_string_lossy()はCow<str>を返す
             }
         }
     }
