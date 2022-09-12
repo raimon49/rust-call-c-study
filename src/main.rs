@@ -29,6 +29,7 @@ fn main() {
     {
         use std::os::raw::c_int;
 
+        // libgit2-devパッケージを入れておく
         #[link(name = "git2")]
         extern {
             pub fn git_libgit2_init() -> c_int;
