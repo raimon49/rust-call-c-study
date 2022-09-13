@@ -30,6 +30,13 @@ fn main() {
         use std::os::raw::c_int;
 
         // libgit2-devパッケージを入れておく
+        // 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
+        // [packcage]
+        // build = "build.rs"
+        // をCargo.tomlに記述してbuildスクリプトのmain()を実効させる
+        // ex) fn main() {
+        //      println!(r"/cargo:rustc-link-search=native=/home/jimb/libgit2-0.25.1/build");
+        // }
         #[link(name = "git2")]
         extern {
             pub fn git_libgit2_init() -> c_int;
