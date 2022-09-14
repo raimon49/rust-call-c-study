@@ -37,6 +37,8 @@ fn main() {
         // ex) fn main() {
         //      println!(r"/cargo:rustc-link-search=native=/home/jimb/libgit2-0.25.1/build");
         // }
+        // git2-rsクレートのbuildスクリプトも複雑だが参考になる
+        // https://github.com/rust-lang/git2-rs/blob/master/libgit2-sys/build.rs
         #[link(name = "git2")]
         extern {
             pub fn git_libgit2_init() -> c_int;
