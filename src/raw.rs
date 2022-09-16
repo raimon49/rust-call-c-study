@@ -5,4 +5,6 @@ use std::os::raw::{c_int, c_char, c_uchar};
 #[link(name = "git2")]
 extern {
     pub fn git_libgit2_init() -> c_int;
+    pub fn git_libgit2_shutdown() -> c_int;
+    pub fn giterr_last() -> *const git_error;
 }
