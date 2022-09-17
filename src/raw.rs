@@ -7,4 +7,8 @@ extern {
     pub fn git_libgit2_init() -> c_int;
     pub fn git_libgit2_shutdown() -> c_int;
     pub fn giterr_last() -> *const git_error;
+
+    pub fn git_repository_open(out: *mut *mut git_repository,
+                               path: *const c_char) -> c_int;
+    pub fn git_repository_free(repo: *mut git_repository);
 }
