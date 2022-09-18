@@ -11,4 +11,8 @@ extern {
     pub fn git_repository_open(out: *mut *mut git_repository,
                                path: *const c_char) -> c_int;
     pub fn git_repository_free(repo: *mut git_repository);
+
+    pub fn git_reference_name_to_id(out: *mut git_oid,
+                                    repo: *mut git_repository,
+                                    reference: *const c_char) -> c_int;
 }
