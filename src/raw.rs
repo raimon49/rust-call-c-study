@@ -15,4 +15,8 @@ extern {
     pub fn git_reference_name_to_id(out: *mut git_oid,
                                     repo: *mut git_repository,
                                     reference: *const c_char) -> c_int;
+
+    pub fn git_commit_lookup(out: *mut *mut git_commit,
+                             repo: *mut git_repository,
+                             id: *const git_oid) -> c_int;
 }
