@@ -24,3 +24,6 @@ extern {
     pub fn git_commit_message(commit: *const git_commit) -> *const c_char;
     pub fn git_commit_free(commit: *mut git_commit);
 }
+
+pub enum git_repository {}
+pub enum git_commit {}
