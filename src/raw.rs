@@ -27,3 +27,9 @@ extern {
 
 pub enum git_repository {}
 pub enum git_commit {}
+
+#[repr(C)]
+pub struct git_error {
+    pub message: *const c_char,
+    pub klass: c_int
+}
