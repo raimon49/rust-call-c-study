@@ -33,3 +33,5 @@ pub struct git_error {
     pub message: *const c_char,
     pub klass: c_int
 }
+
+pub type git_time_t = i64;
