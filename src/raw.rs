@@ -35,3 +35,10 @@ pub struct git_error {
 }
 
 pub type git_time_t = i64;
+
+#[repr(C)]
+pub struct git_signature {
+    pub name: *const c_char,
+    pub email: *const c_char,
+    pub when: git_time
+}
