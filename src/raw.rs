@@ -9,7 +9,7 @@ extern {
     pub fn giterr_last() -> *const git_error;
 
     // libgit2/include/git2/repository.hの
-    // extern int git_repository_open(git_repository **out, const char *path)をRustコード化した宣言
+    // extern int git_repository_open(git_repository **out, const char *path); をRustコード化した宣言
     pub fn git_repository_open(out: *mut *mut git_repository,
                                path: *const c_char) -> c_int;
     pub fn git_repository_free(repo: *mut git_repository);
@@ -27,6 +27,8 @@ extern {
     pub fn git_commit_free(commit: *mut git_commit);
 }
 
+// libgit2/include/git2/repository.hの
+// typedef struct git_repository git_repository; をRustコード化した宣言
 pub enum git_repository {}
 pub enum git_commit {}
 
