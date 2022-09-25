@@ -8,6 +8,8 @@ extern {
     pub fn git_libgit2_shutdown() -> c_int;
     pub fn giterr_last() -> *const git_error;
 
+    // libgit2/include/git2/repository.hの
+    // extern int git_repository_open(git_repository **out, const char *path)をRustコード化した宣言
     pub fn git_repository_open(out: *mut *mut git_repository,
                                path: *const c_char) -> c_int;
     pub fn git_repository_free(repo: *mut git_repository);
