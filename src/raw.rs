@@ -38,6 +38,11 @@ pub struct git_error {
     pub klass: c_int
 }
 
+#[repr(C)]
+pub struct git_oid {
+    pub id: [c_uchar; 20]
+}
+
 pub type git_time_t = i64;
 
 #[repr(C)]
