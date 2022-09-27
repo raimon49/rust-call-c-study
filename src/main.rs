@@ -1,3 +1,5 @@
+mod raw;
+
 fn main() {
     {
         use std::os::raw::c_char;
