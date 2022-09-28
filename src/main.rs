@@ -29,7 +29,23 @@ fn main() {
         }
     }
     {
+        use std::ffi::CStr;
         use std::os::raw::c_int;
+
+        fn check(activity: &'static str, status: c_int) -> c_int {
+            if status < 0 {
+                unsafe {
+                    let error = &*raw::giterr_last();
+                    println!("error while {}: {} ({})",
+                             activity,
+                             CStr::from_ptr(error.message).to_string_lossy(),
+                             error.klass);
+                    std::process::exit(1);
+                }
+            }
+
+            status
+        }
 
         // libgit2-devパッケージを入れておく
         // 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
