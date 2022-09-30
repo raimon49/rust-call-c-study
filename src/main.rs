@@ -47,6 +47,10 @@ fn main() {
             status
         }
 
+        unsafe {
+            check("initializing library", raw::git_libgit2_init());
+        }
+
         // libgit2-devパッケージを入れておく
         // 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
         // [packcage]
