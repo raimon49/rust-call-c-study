@@ -51,6 +51,14 @@ fn main() {
             check("initializing library", raw::git_libgit2_init());
         }
 
+        unsafe fn chow_commit(commit: *const raw::git_commit) {
+            let author = raw::git_commit_author(commit);
+
+            let name = CStr::from_ptr((*author).name).to_string_lossy();
+            let email = CStr::from_ptr((*author).email).to_string_lossy();
+            println!("{} <{}>\n", name, email);
+        }
+
         // libgit2-devパッケージを入れておく
         // 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
         // [packcage]
