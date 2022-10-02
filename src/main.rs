@@ -57,6 +57,9 @@ fn main() {
             let name = CStr::from_ptr((*author).name).to_string_lossy();
             let email = CStr::from_ptr((*author).email).to_string_lossy();
             println!("{} <{}>\n", name, email);
+
+            let message = raw::git_commit_message(commit);
+            println!("{}", CStr::from_ptr(message).to_string_lossy());
         }
 
         // libgit2-devパッケージを入れておく
