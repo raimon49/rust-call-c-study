@@ -29,8 +29,12 @@ fn main() {
         }
     }
     {
+        use std::ffi::CString;
+        use std::mem;
+        use std::ptr;
         use std::ffi::CStr;
         use std::os::raw::c_int;
+        use std::os::raw::c_char;
 
         fn check(activity: &'static str, status: c_int) -> c_int {
             if status < 0 {
@@ -47,11 +51,7 @@ fn main() {
             status
         }
 
-        unsafe {
-            check("initializing library", raw::git_libgit2_init());
-        }
-
-        unsafe fn chow_commit(commit: *const raw::git_commit) {
+        unsafe fn show_commit(commit: *const raw::git_commit) {
             let author = raw::git_commit_author(commit);
 
             let name = CStr::from_ptr((*author).name).to_string_lossy();
@@ -62,25 +62,35 @@ fn main() {
             println!("{}", CStr::from_ptr(message).to_string_lossy());
         }
 
-        // libgit2-devパッケージを入れておく
-        // 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
-        // [packcage]
-        // build = "build.rs"
-        // をCargo.tomlに記述してbuildスクリプトのmain()を実効させる
-        // ex) fn main() {
-        //      println!(r"/cargo:rustc-link-search=native=/home/jimb/libgit2-0.25.1/build");
-        // }
-        // git2-rsクレートのbuildスクリプトも複雑だが参考になる
-        // https://github.com/rust-lang/git2-rs/blob/master/libgit2-sys/build.rs
-        #[link(name = "git2")]
-        extern {
-            pub fn git_libgit2_init() -> c_int;
-            pub fn git_libgit2_shutdown() -> c_int;
-        }
+        let path = std::env::args().skip(1).next()
+            .expect("usage: git-toy PATH");
+        let path = CString::new(path)
+            .expect("path contains null characters");
 
         unsafe {
-            git_libgit2_init();
-            git_libgit2_shutdown();
+            check("initializing library", raw::git_libgit2_init());
+
+            let mut repo = ptr::null_mut();
+            check("opening repository",
+                raw::git_repository_open(&mut repo, path.as_ptr()));
+
+            let c_name = b"HEAD\0".as_ptr() as *const c_char;
+            let mut oid = mem::uninitialized();
+            check("looking up HEAD",
+                raw::git_reference_name_to_id(&mut oid, repo, c_name));
+
+            let mut commit = ptr::null_mut();
+            check("looking up commit",
+                raw::git_commit_lookup(&mut commit, repo, &oid));
+
+            show_commit(commit);
+
+            raw::git_commit_free(commit);
+
+            raw::git_repository_free(repo);
+
+            check("shutting down library",
+                raw::git_libgit2_shutdown());
         }
     }
 }
