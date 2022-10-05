@@ -70,6 +70,8 @@ fn main() {
         unsafe {
             check("initializing library", raw::git_libgit2_init());
 
+            // 指定されたパスのGitリポジトリをオープンし、結果をチェック
+            // 引数の&mut repoは暗黙的にrawポインタへ型変換され*mut *mut git_repository型で渡される
             let mut repo = ptr::null_mut();
             check("opening repository",
                 raw::git_repository_open(&mut repo, path.as_ptr()));
