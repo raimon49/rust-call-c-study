@@ -77,11 +77,11 @@ fn main() {
                 raw::git_repository_open(&mut repo, path.as_ptr()));
 
             let c_name = b"HEAD\0".as_ptr() as *const c_char;
-            let mut oid = mem::uninitialized();
+            let mut oid = mem::uninitialized(); // まったく初期化されていない任意の型を返す
             check("looking up HEAD",
                 raw::git_reference_name_to_id(&mut oid, repo, c_name));
 
-            let mut commit = ptr::null_mut();
+            let mut commit = ptr::null_mut(); // mem::uninitialized()でもいいが危険なのでnullで初期化
             check("looking up commit",
                 raw::git_commit_lookup(&mut commit, repo, &oid));
 
