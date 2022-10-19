@@ -85,10 +85,13 @@ fn main() {
             check("looking up commit",
                 raw::git_commit_lookup(&mut commit, repo, &oid));
 
+            // 変数commitに格納されたコミットを表示
             show_commit(commit);
 
+            // commitオブジェクトの解放
             raw::git_commit_free(commit);
 
+            // repositoryオブジェクトの解放
             raw::git_repository_free(repo);
 
             check("shutting down library",
