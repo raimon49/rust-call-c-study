@@ -1,6 +1,26 @@
 #![allow(non_camel_case_types)]
 
 use std::os::raw::{c_int, c_char, c_uchar};
+use std::error;
+use std::fmt;
+use std::result;
+
+#[derive(Debug)]
+pub struct Error {
+    code: i32,
+    message: String,
+    class: i32
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> result::Result<(), fmt::Error> {
+        self.message.fmt(f)
+    }
+}
+
+impl error::Error for Error {
+    fn description(&self) -> &str { &self.message }
+}
 
 #[link(name = "git2")]
 extern {
