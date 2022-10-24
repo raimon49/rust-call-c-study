@@ -22,6 +22,8 @@ impl error::Error for Error {
     fn description(&self) -> &str { &self.message }
 }
 
+pub type Result<T> = result::Result<T, Error>;
+
 #[link(name = "git2")]
 extern {
     pub fn git_libgit2_init() -> c_int;
