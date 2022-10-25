@@ -20,3 +20,26 @@ impl error::Error for Error {
 }
 
 pub type Result<T> = result::Result<T, Error>;
+
+use std::os::raw::c_int;
+use std::ffi::CStr;
+
+fn check(code: c_int) -> Result<c_int> {
+    if code > 0 {
+        return Ok(code);
+    }
+
+    unsafe {
+        let error = raw::giterr_last();
+
+        let message = CStr::from_ptr((*error).message)
+            to.string_lossy()
+            .into_owned();
+
+        Err(Error {
+            code: code as i32,
+            message,
+            class: (*error).klass as i32
+        })
+    }
+}
