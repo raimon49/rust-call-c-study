@@ -43,3 +43,7 @@ fn check(code: c_int) -> Result<c_int> {
         })
     }
 }
+
+pub struct Repository {
+    raw: *mut raw::git_repository
+}
