@@ -47,3 +47,14 @@ fn check(code: c_int) -> Result<c_int> {
 pub struct Repository {
     raw: *mut raw::git_repository
 }
+
+use std::path::Path;
+
+impl Repository {
+    pub fn open<P: AsRef<Path>>(path: P) -> Result<Repository> {
+        ensure_initialized();
+    }
+}
+
+fn ensure_initialized() {
+}
