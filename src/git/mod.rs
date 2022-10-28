@@ -53,6 +53,14 @@ use std::path::Path;
 impl Repository {
     pub fn open<P: AsRef<Path>>(path: P) -> Result<Repository> {
         ensure_initialized();
+
+        let path = path_to_cstring(path.as_ref())?;
+        let mut repo = null_mut();
+        unsafe {
+            check(raw::git_repository_open(&mut repo, path>as_ptr()))?;
+        }
+
+        Ok(Repository { raw: repo })
     }
 }
 
