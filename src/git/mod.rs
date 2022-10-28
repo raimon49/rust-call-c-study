@@ -64,5 +64,17 @@ impl Repository {
     }
 }
 
+use std;
+use libc;
+
 fn ensure_initialized() {
+    static ONCE: sstd::sync::Once = std::sync::ONCE_INIT;
+
+    ONCE.call_once(|| {
+        unsafe {
+            check(raw::git_libgit2_init())
+                .expect("initializing libgit2 failed");
+            assert_eq!(libc::atexit(shutdown), 0);
+        }
+    })
 }
