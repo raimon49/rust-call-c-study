@@ -78,3 +78,16 @@ fn ensure_initialized() {
         }
     })
 }
+
+use std::io::Write;
+
+extern fn shutdown() {
+    unsafe {
+        if let Err(e) = check(raw::git_libgit2_shutdown()) {
+            let _ = writeln!(std::io::stderr(),
+                             "shutting down libgit2 faild: {}",
+                             e);
+            std::process::abort();
+        }
+    }
+}
