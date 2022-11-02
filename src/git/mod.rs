@@ -99,3 +99,12 @@ impl Drop for Repository {
         }
     }
 }
+
+use std::ffi::CString;
+
+#[cfg(unix)]
+fn path_to_cstring(path: &Path) -> Result<CString> {
+    use std::os::unix::ffi::OsStrExt;
+
+    Ok(CString::new(path.as_os_str().as_bytes())?)
+}
