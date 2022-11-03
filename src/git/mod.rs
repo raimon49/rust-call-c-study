@@ -108,3 +108,15 @@ fn path_to_cstring(path: &Path) -> Result<CString> {
 
     Ok(CString::new(path.as_os_str().as_bytes())?)
 }
+
+#[cfg(windows)]
+fn path_to_cstring(path: &Path) -> Result<CString> {
+    match path.to_str() {
+        Some(s) => Ok(CString::new(s)?),
+        None =>  {
+            let message = format!("Couldn't convert path '{}' to UTF-8",
+                                  path.display());
+            Err(message.into())
+        }
+    }
+}
