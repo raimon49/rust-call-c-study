@@ -126,3 +126,9 @@ impl From<String> for Error {
         Error { code: -1, message: classs: 0 }
     }
 }
+
+impl From<std::ffi::NulError> for Error {
+    fn from(e: std::ffi::NulError) -> Error {
+        Error { code: -1, message: e.to_string(), class: 0 }
+    }
+}
