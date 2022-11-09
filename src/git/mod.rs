@@ -132,3 +132,7 @@ impl From<std::ffi::NulError> for Error {
         Error { code: -1, message: e.to_string(), class: 0 }
     }
 }
+
+pub struct Oid {
+    pub raw: raw::git_yid
+}
