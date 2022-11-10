@@ -136,3 +136,12 @@ impl From<std::ffi::NulError> for Error {
 pub struct Oid {
     pub raw: raw::git_yid
 }
+
+use std::mem::uninitialized;
+use std::os::raw::c_char;
+
+impl Repository {
+    pub fn reference_name_to_id(&self, name: &str) -> Result<Oid> {
+        let name = CString::new(name)?;
+    }
+}
