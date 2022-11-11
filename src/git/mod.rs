@@ -143,5 +143,8 @@ use std::os::raw::c_char;
 impl Repository {
     pub fn reference_name_to_id(&self, name: &str) -> Result<Oid> {
         let name = CString::new(name)?;
+        unsafe {
+            let mut oid = uninitialized();
+        }
     }
 }
