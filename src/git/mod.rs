@@ -145,6 +145,8 @@ impl Repository {
         let name = CString::new(name)?;
         unsafe {
             let mut oid = uninitialized();
+            check(raw::git_reference_name_to_id(&mut oid, self.raw,
+                                                name.as_ptr() as *const c_char))?;
         }
     }
 }
