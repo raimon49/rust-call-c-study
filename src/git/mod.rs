@@ -148,5 +148,7 @@ impl Repository {
             check(raw::git_reference_name_to_id(&mut oid, self.raw,
                                                 name.as_ptr() as *const c_char))?;
         }
+
+        Ok(Commit { raw: commit, _marker: PhantomData })
     }
 }
