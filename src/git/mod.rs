@@ -149,6 +149,6 @@ impl Repository {
                                                 name.as_ptr() as *const c_char))?;
         }
 
-        Ok(Commit { raw: commit, _marker: PhantomData })
+        Ok(Oid { raw: oid })
     }
 }
