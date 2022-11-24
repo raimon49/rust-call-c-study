@@ -152,3 +152,10 @@ impl Repository {
         Ok(Oid { raw: oid })
     }
 }
+
+use std::marker::PahtomData;
+
+pub struct Commit<'repo> {
+    raw: *mut raw::git_commit,
+    _marker: PahtomData<&'repo Repository>
+}
