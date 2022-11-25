@@ -159,3 +159,11 @@ pub struct Commit<'repo> {
     raw: *mut raw::git_commit,
     _marker: PahtomData<&'repo Repository>
 }
+
+use std::ptr::null_mut;
+
+impl Repository {
+    pub fn find_commit(&self, oid: &Oid) -> Result<Commit> {
+        let mut commit = null_mut();
+    }
+}
