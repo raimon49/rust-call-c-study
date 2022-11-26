@@ -165,5 +165,10 @@ use std::ptr::null_mut;
 impl Repository {
     pub fn find_commit(&self, oid: &Oid) -> Result<Commit> {
         let mut commit = null_mut();
+        unsafe {
+            check(raw::git_commit_lookup(&mut commit, self.raw, &oid.raw))?;
+        }
+
+        Ok(Commit { raw: commit, _marker: PhantomData })
     }
 }
