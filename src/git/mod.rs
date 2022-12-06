@@ -172,3 +172,9 @@ impl Repository {
         Ok(Commit { raw: commit, _marker: PhantomData })
     }
 }
+
+impl <'repo> Drop for <'repo> {
+    pub fn anchor(&self) -> Signature {
+        // TODO
+    }
+}
