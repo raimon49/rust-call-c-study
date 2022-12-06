@@ -173,7 +173,7 @@ impl Repository {
     }
 }
 
-impl <'repo> Drop for <'repo> {
+impl <'repo> Drop for Commit<'repo> {
     pub fn anchor(&self) -> Signature {
         // TODO
     }
