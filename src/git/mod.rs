@@ -175,6 +175,11 @@ impl Repository {
 
 impl <'repo> Drop for Commit<'repo> {
     pub fn author(&self) -> Signature {
-        // TODO
+        unsafe {
+            Signature {
+                raw: raw::git_commit_author(self.raw),
+                _marker: PhantomData
+            }
+        }
     }
 }
