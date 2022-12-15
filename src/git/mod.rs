@@ -174,6 +174,14 @@ impl Repository {
 }
 
 impl <'repo> Drop for Commit<'repo> {
+    pub drop(&mut self) {
+        unsafe {
+            raw::git_commit_free(self.raw);
+        }
+    }
+}
+
+impl <'repo> Commit<'repo> {
     pub fn author(&self) -> Signature {
         unsafe {
             Signature {
