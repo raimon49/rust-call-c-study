@@ -190,4 +190,11 @@ impl <'repo> Commit<'repo> {
             }
         }
     }
+
+    pub fn message(&self) -> Option<&str> {
+        unsafe {
+            let message = raw::git_commit_message(self.raw);
+            char_ptr_to_str(self, message)
+        }
+    }
 }
