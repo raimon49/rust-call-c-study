@@ -198,3 +198,8 @@ impl <'repo> Commit<'repo> {
         }
     }
 }
+
+pub struct Signature<'text> {
+    raw: *const raw::git_signature,
+    _marker: PhantomData<&'text str>
+}
