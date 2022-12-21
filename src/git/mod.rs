@@ -206,4 +206,9 @@ pub struct Signature<'text> {
 
 impl<'text> Signature<'text> {
     // TODO
+    pub fn name(&self) -> Option<&str> {
+        unsafe {
+            char_ptr_to_str(self, (*self.raw).name)
+        }
+    }
 }
