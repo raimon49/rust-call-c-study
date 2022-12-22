@@ -211,4 +211,10 @@ impl<'text> Signature<'text> {
             char_ptr_to_str(self, (*self.raw).name)
         }
     }
+
+    pub fn email(&self) -> Option<&str> {
+        unsafe {
+            char_ptr_to_str(self, (*self.raw).email)
+        }
+    }
 }
