@@ -219,8 +219,9 @@ impl<'text> Signature<'text> {
 }
 
 unsafe fn char_ptr_to_str<T>(_owner: T, ptr: *const c_char) -> Option<&str> {
-    // TODO
     if ptr.is_null() {
         return None;
+    } else {
+        CStr::from_ptr(ptr).to_str().ok()
     }
 }
