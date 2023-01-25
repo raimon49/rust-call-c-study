@@ -146,7 +146,7 @@ impl Repository {
     pub fn reference_name_to_id(&self, name: &str) -> Result<Oid> {
         let name = CString::new(name)?;
         unsafe {
-            let mut oid = uninitialized();
+            let mut oid = uninitialized(); // まったく初期化されていない任意の型を返す
             check(raw::git_reference_name_to_id(&mut oid, self.raw,
                                                 name.as_ptr() as *const c_char))?;
         }
@@ -166,7 +166,7 @@ use std::ptr::null_mut;
 
 impl Repository {
     pub fn find_commit(&self, oid: &Oid) -> Result<Commit> {
-        let mut commit = null_mut();
+        let mut commit = null_mut(); // mem::uninitialized()でもいいが危険なのでnullで初期化
         unsafe {
             check(raw::git_commit_lookup(&mut commit, self.raw, &oid.raw))?;
         }
