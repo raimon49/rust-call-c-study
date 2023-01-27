@@ -3,7 +3,17 @@ name = "rust-call-c-study"
 version = "0.1.0"
 authors = ["raimon <raimon49@hotmail.com>"]
 edition = "2018"
-build = "build.rs"
+# build = "build.rs"
+# libgit2-devパッケージを入れておく
+# 独自ビルドしたlibgit2を利用する場合は、Cargo.tomlと同じディレクトリにbuild.rsを容易し、
+# [packcage]
+# build = "build.rs"
+# をCargo.tomlに記述してbuildスクリプトのmain()を実効させる
+# ex) fn main() {
+#      println!(r"/cargo:rustc-link-search=native=/home/jimb/libgit2-0.25.1/build");
+# }
+# git2-rsクレートのbuildスクリプトも複雑だが参考になる
+# https://github.com/rust-lang/git2-rs/blob/master/libgit2-sys/build.rs
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
