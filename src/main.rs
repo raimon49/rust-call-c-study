@@ -1,5 +1,4 @@
 extern crate libc;
-mod raw;
 
 fn main() {
     {
