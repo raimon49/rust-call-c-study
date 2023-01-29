@@ -1,4 +1,5 @@
 extern crate libc;
+mod git;
 
 fn main() {
     {
@@ -29,8 +30,6 @@ fn main() {
         }
     }
     {
-        mod git;
-
         let path = std::env::args().skip(1).next()
             .expect("usage: git-toy PATH");
         let repo = git::Repository::open(&path)
