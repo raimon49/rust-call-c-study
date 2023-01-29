@@ -78,7 +78,7 @@ fn ensure_initialized() {
                 .expect("initializing libgit2 failed");
             assert_eq!(libc::atexit(shutdown), 0);
         }
-    })
+    });
 }
 
 use std::io::Write;
