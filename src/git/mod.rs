@@ -33,7 +33,7 @@ fn check(code: c_int) -> Result<c_int> {
         let error = raw::giterr_last();
 
         let message = CStr::from_ptr((*error).message)
-            to.string_lossy()
+            .to_string_lossy()
             .into_owned();
 
         Err(Error {
