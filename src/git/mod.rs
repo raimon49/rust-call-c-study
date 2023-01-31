@@ -125,7 +125,7 @@ fn path_to_cstring(path: &Path) -> Result<CString> {
 
 impl From<String> for Error {
     fn from(message: String) -> Error {
-        Error { code: -1, message: classs: 0 }
+        Error { code: -1, message: message, class: 0 }
     }
 }
 
