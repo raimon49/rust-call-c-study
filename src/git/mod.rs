@@ -176,7 +176,7 @@ impl Repository {
 }
 
 impl <'repo> Drop for Commit<'repo> {
-    pub drop(&mut self) {
+    fn drop(&mut self) {
         unsafe {
             raw::git_commit_free(self.raw);
         }
