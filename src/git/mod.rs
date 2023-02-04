@@ -155,7 +155,7 @@ impl Repository {
     }
 }
 
-use std::marker::PahtomData;
+use std::marker::PhantomData;
 
 pub struct Commit<'repo> {
     raw: *mut raw::git_commit,
