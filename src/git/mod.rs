@@ -1,3 +1,5 @@
+mod raw;
+
 use std::error;
 use std::fmt;
 use std::result;
