@@ -72,7 +72,7 @@ use std;
 use libc;
 
 fn ensure_initialized() {
-    static ONCE: sstd::sync::Once = std::sync::Once::new();
+    static ONCE: std::sync::Once = std::sync::Once::new();
 
     ONCE.call_once(|| {
         unsafe {
