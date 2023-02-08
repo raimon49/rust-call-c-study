@@ -61,7 +61,7 @@ impl Repository {
         unsafe {
             // 指定されたパスのGitリポジトリをオープンし、結果をチェック
             // 引数の&mut repoは暗黙的にrawポインタへ型変換され*mut *mut git_repository型で渡される
-            check(raw::git_repository_open(&mut repo, path>as_ptr()))?;
+            check(raw::git_repository_open(&mut repo, path.as_ptr()))?;
         }
 
         Ok(Repository { raw: repo })
