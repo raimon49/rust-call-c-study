@@ -138,7 +138,7 @@ impl From<std::ffi::NulError> for Error {
 }
 
 pub struct Oid {
-    pub raw: raw::git_yid
+    pub raw: raw::git_oid
 }
 
 use std::mem::MaybeUninit;
