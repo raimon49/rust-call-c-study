@@ -160,7 +160,7 @@ use std::marker::PhantomData;
 
 pub struct Commit<'repo> {
     raw: *mut raw::git_commit,
-    _marker: PahtomData<&'repo Repository>
+    _marker: PhantomData<&'repo Repository>
 }
 
 use std::ptr::null_mut;
