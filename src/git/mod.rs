@@ -148,7 +148,7 @@ impl Repository {
     pub fn reference_name_to_id(&self, name: &str) -> Result<Oid> {
         let name = CString::new(name)?;
         unsafe {
-            let mut oid = MaybeUninit::uninit(); // まったく初期化されていない任意の型を返す
+            let mut oid = MaybeUninit::uninit().assume_init(); // まったく初期化されていない任意の型を返す
             check(raw::git_reference_name_to_id(&mut oid, self.raw,
                                                 name.as_ptr() as *const c_char))?;
             Ok(Oid { raw: oid })
