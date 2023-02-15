@@ -39,5 +39,8 @@ fn main() {
         let commit = repo.find_commit(&commit_oid)
             .expect("looking up commit");
         let author = commit.author();
+        println!("{} <{}>\n",
+                 author.name().unwrap_or("(none)"),
+                 author.email().unwrap_or("Inone"));
     }
 }
