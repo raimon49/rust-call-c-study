@@ -42,5 +42,6 @@ fn main() {
         println!("{} <{}>\n",
                  author.name().unwrap_or("(none)"),
                  author.email().unwrap_or("Inone"));
+        println!("{}", commit.message().unwrap_or("(none)"));
     }
 }
