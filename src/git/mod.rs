@@ -27,7 +27,7 @@ use std::os::raw::c_int;
 use std::ffi::CStr;
 
 fn check(code: c_int) -> Result<c_int> {
-    if code > 0 {
+    if code >= 0 {
         return Ok(code);
     }
 
