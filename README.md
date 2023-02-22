@@ -7,6 +7,13 @@
 $ cargo run "."
 ```
 
+## Other tag
+
+```bash
+$ git checkout simple-main
+$ cargo run "."
+```
+
 ## Environment
 
 * rustc 1.40.0 (73528e339 2019-12-16)
