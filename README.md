@@ -9,6 +9,8 @@ $ cargo run "."
 
 ## Other tag
 
+A simple `main.rs` and `mod.rs` two-file structure. See [Tags/simple-main](rust-call-c-study/tree/simple-main)
+
 ```bash
 $ git checkout simple-main
 $ cargo run "."
